@@ -7,7 +7,9 @@ body {
     width: 100%;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 0;
     padding: 0;
 }
@@ -21,7 +23,7 @@ nav {
     justify-content: space-between;
 }
 
-nav h2{
+nav h2 {
     font-size: 30px;
 }
 
@@ -50,9 +52,9 @@ nav a {
     z-index: 1;
 }
 
-.other-hero{
+.other-hero {
     height: 100vh;
-    background: url("/images/brandon-holmes-GofYo51GQ_4-unsplash.jpg") no-repeat center/cover ;
+    background: url("/images/brandon-holmes-GofYo51GQ_4-unsplash.jpg") no-repeat center/cover;
 }
 
 .hero h1 {
@@ -62,7 +64,7 @@ nav a {
     text-align: left;
     z-index: 5;
     position: relative;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero h1 span {
@@ -79,19 +81,22 @@ nav a {
     max-width: 600px;
     position: relative;
     z-index: 5;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 main {
     padding: 18px;
-    max-width: 900px;
+    max-width: 600px;
     margin: 18px auto;
     background: #adcaff;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
 }
 
-.in-main{
+.in-main {
     height: 100%;
 }
 
@@ -99,7 +104,7 @@ main h1 {
     text-align: center;
     margin-bottom: 18px;
     font-size: 2.5rem;
-} 
+}
 
 .doctor,
 .appointment {
@@ -117,6 +122,8 @@ input[type=submit] {
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 input,
@@ -127,7 +134,7 @@ select {
     background-color: #f0f5ff;
 }
 
-footer{
+footer {
     display: flex;
     justify-content: center;
     height: 50px;
@@ -154,7 +161,7 @@ footer{
     text-align: left;
 }
 
-.appointment h4{
+.appointment h4 {
     margin-top: 10px;
 }
 
@@ -162,29 +169,116 @@ footer{
     display: block;
     width: fit-content;
     text-decoration: none;
-    border: none; 
+    border: none;
     color: white;
     background-color: #054fd9;
     padding: 10px 20px;
     border-radius: 50px;
 }
 
-.bottom-line{
+.bottom-line {
     width: 100%;
     text-align: center;
 }
 
-.bottom-line p a{
+.bottom-line p a {
     color: rgb(106, 0, 255);
     text-decoration: none;
 }
 
-.doctor-body{
+.doctor-body {
     height: auto;
     background: url("/images/Doctor.jpg") no-repeat center/cover;
 }
 
-.patient-body{
+.patient-body {
     height: auto;
     background: url("/images/patient.jpg") no-repeat center/cover;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form label{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ...existing code... */
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    nav,
+    footer {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .in-main,
+    main,
+    form {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input,
+    select,
+    button {
+        width: 100% !important;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .bottom-line {
+        text-align: center;
+    }
+}
+
+/* Optional: Make tables scrollable on mobile */
+@media (max-width: 600px) {
+    body {
+        margin: 0;
+        padding: 0;
+        height: max-content;
+    }
+
+    nav {
+        padding: 10px 10px;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    .hero h1 span {
+        font-size: 3rem;
+    }
+
+    .in-main {
+        height: max-content
+    }
 }
