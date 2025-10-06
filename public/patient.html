@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="patient-body">
+    <nav>
+        <h2>OMKAR HOSPITAL</h2>
+        <div class="in-nav">
+            <a href="/">Home</a> | <a href="#" id="logoutLink">Logout</a>
+        </div>
+    </nav>
+    <main>
+        <h1>Patient Dashboard</h1>
+
+        <section>
+            <h2>Book an appointment</h2>
+            <form id="bookForm">
+                <label>Doctor:
+                    <select id="doctorSelect"></select>
+                </label><br>
+                <label>Date & time: <input type="datetime-local" id="datetime" required></label><br>
+                <label><input type="checkbox" id="zoomOption"> Book with Zoom meeting</label><br>
+                <button type="submit">Book</button>
+            </form>
+            <div id="bookMsg"></div>
+        </section>
+
+        <section>
+            <h2>Your Appointments</h2>
+            <div id="appointmentsList">Loading...</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>copyright @ Kavya Infoweb Pvt. Ltd.</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        // Set min date for datetime-local input to now
+        function setMinDateTime() {
+            const dt = document.getElementById('datetime');
+            const now = new Date();
+            // Format as yyyy-MM-ddTHH:mm
+            const pad = n => n.toString().padStart(2, '0');
+            const min = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+            dt.min = min;
+        }
+        setMinDateTime();
+        // Optionally update min on focus
+        document.getElementById('datetime').addEventListener('focus', setMinDateTime);
+        async function ensurePatient() {
+            const s = await (await fetch('/api/session')).json();
+            if (!s.user) return location.href = '/login.html';
+            if (s.user.role !== 'patient') {
+                if (s.user.role === 'doctor') return location.href = '/doctor.html';
+                return location.href = '/login.html';
+            }
+            document.getElementById('logoutLink').addEventListener('click', async () => { await fetch('/api/logout', { method: 'POST' }); location.href = '/'; });
+        }
+
+        async function loadDoctorsForBooking() {
+            const r = await (await fetch('/api/doctors')).json();
+            const sel = document.getElementById('doctorSelect');
+            sel.innerHTML = r.doctors.map(d => `<option value="${d.doctor_id}">${d.name} - ${d.specialization}</option>`).join('');
+        }
+
+        document.getElementById('bookForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const doctor_id = document.getElementById('doctorSelect').value;
+            const date_time = document.getElementById('datetime').value;
+            const with_zoom = document.getElementById('zoomOption').checked;
+            // Prevent booking in the past
+            if (new Date(date_time) < new Date()) {
+                document.getElementById('bookMsg').innerText = 'Cannot book an appointment in the past.';
+                return;
+            }
+            const res = await fetch('/api/book-appointment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ doctor_id, date_time, with_zoom })
+            });
+            const j = await res.json();
+            document.getElementById('bookMsg').innerText = j.error || (j.success ? 'Booked!' : JSON.stringify(j));
+            if (j.success) loadAppointments();
+        });
+
+        async function loadAppointments() {
+            const res = await fetch('/api/patient/appointments');
+            const j = await res.json();
+            const div = document.getElementById('appointmentsList');
+            if (!j.appointments || j.appointments.length === 0) div.innerText = 'No appointments yet.';
+            else {
+                div.innerHTML = j.appointments.map(a => `
+                    <div class="appointment">
+                        <p><strong>With:</strong> ${a.doctor_name} (${a.specialization})</p>
+                        <p><strong>When:</strong> ${a.date_time}</p>
+                        <p><strong>Status:</strong> ${a.status}</p>
+                        ${a.zoom_link ? `<h4><a href="${a.zoom_link}" target="_blank">Join Zoom Meeting</a></h4>` : ''}
+                        ${a.file_path ? `<h4><a href="${a.file_path}" target="_blank">Download Prescription (PDF)</a></h4>` : ''}
+                    </div>
+                `).join('');
+            }
+        }
+
+        (async () => { await ensurePatient(); await loadDoctorsForBooking(); await loadAppointments(); })();
+    </script>
+</body>
+
+</html>

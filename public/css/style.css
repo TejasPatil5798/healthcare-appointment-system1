@@ -1,0 +1,190 @@
+body {
+    font-family: system-ui, -apple-system, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f8fb;
+    color: #111;
+    width: 100%;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background: #2d6cdf;
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav h2{
+    font-size: 30px;
+}
+
+nav a {
+    color: white;
+    margin: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.hero {
+    background: url("/images/martha-dominguez-de-gouveia-nMyM7fxpokE-unsplash.jpg") no-repeat center/cover;
+    height: auto;
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.other-hero{
+    height: 100vh;
+    background: url("/images/brandon-holmes-GofYo51GQ_4-unsplash.jpg") no-repeat center/cover ;
+}
+
+.hero h1 {
+    color: white;
+    font-size: 3rem;
+    padding: 20vh 10px 0 50px;
+    text-align: left;
+    z-index: 5;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.hero h1 span {
+    color: #2d6cdf;
+    font-size: 4rem;
+    z-index: 2;
+}
+
+.hero p {
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 0 50px 50px;
+    text-align: left;
+    max-width: 600px;
+    position: relative;
+    z-index: 5;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+main {
+    padding: 18px;
+    max-width: 900px;
+    margin: 18px auto;
+    background: #adcaff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
+}
+
+.in-main{
+    height: 100%;
+}
+
+main h1 {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 2.5rem;
+} 
+
+.doctor,
+.appointment {
+    border: 1px solid #e6e9ef;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+button,
+input[type=submit] {
+    background: #054fd9;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+input,
+select {
+    padding: 6px 8px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    background-color: #f0f5ff;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    /* margin-top: 20px; */
+    background-color: #054fd9;
+    color: white;
+    align-self: self-end;
+    margin-bottom: 0;
+}
+
+
+
+/* ==== */
+
+#registerForm label span {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
+
+#loginForm label span {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
+
+.appointment h4{
+    margin-top: 10px;
+}
+
+.appointment h4 a {
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+    border: none; 
+    color: white;
+    background-color: #054fd9;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.bottom-line{
+    width: 100%;
+    text-align: center;
+}
+
+.bottom-line p a{
+    color: rgb(106, 0, 255);
+    text-decoration: none;
+}
+
+.doctor-body{
+    height: auto;
+    background: url("/images/Doctor.jpg") no-repeat center/cover;
+}
+
+.patient-body{
+    height: auto;
+    background: url("/images/patient.jpg") no-repeat center/cover;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Healthcare App - Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <h2>OMKAR HOSPITAL</h2>
+        <div class="in-nav">
+            <span id="nav-links"><a href="/login.html">Login</a> | <a href="/register.html">Register</a></span>
+        </div>
+
+    </nav>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <h1>Welcome to the <br> <span>Healthcare Appointment <br>System</span></h1>
+        <p>Book appointments with doctors easily and manage your health records.</p>
+    </section>
+
+    <main>
+        <h1>Available Doctors</h1>
+        <div id="doctorsList">Loading doctors...</div>
+    </main>
+
+    <footer>
+        <p>copyright @ Kavya Infoweb Pvt. Ltd.</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        async function loadDoctors() {
+            const res = await fetch('/api/doctors');
+            const data = await res.json();
+            const container = document.getElementById('doctorsList');
+            if (!data.doctors || data.doctors.length === 0) container.innerText = 'No doctors found.';
+            else {
+                container.innerHTML = data.doctors.map(d => `
+          <div class="doctor">
+            <h3>${d.name}</h3>
+            <p><strong>Specialization:</strong> ${d.specialization}</p>
+            <p><strong>Availability:</strong> ${d.availability}</p>
+            <p><strong>Contact:</strong> ${d.contact || d.email}</p>
+            <button onclick="location.href='/login.html'">Book Appointment</button>
+          </div>
+        `).join('');
+            }
+        }
+        loadDoctors();
+    </script>
+</body>
+
+</html>
