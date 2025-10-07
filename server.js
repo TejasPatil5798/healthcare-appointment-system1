@@ -137,7 +137,6 @@ if (!fs.existsSync(DATA_DIR)) {
 }
 const DB_FILE = path.join(DATA_DIR, 'database.sqlite');
 
-const path = require('path');
 const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) console.error('Database connection error:', err);
