@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
 const jwt = require('jsonwebtoken');
@@ -139,8 +140,8 @@ const DB_FILE = path.join(DATA_DIR, 'database.sqlite');
 
 const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) console.error('Database connection error:', err);
-    else console.log('Connected to SQLite database');
+    if (err) console.error('❌ Database connection error:', err);
+    else console.log('✅ Connected to SQLite database');
 });
 
 
