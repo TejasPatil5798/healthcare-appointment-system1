@@ -8,12 +8,11 @@ const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
-const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// -------------------- Database (PostgreSQL) --------------------
+// -------------------- PostgreSQL Connection --------------------
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
@@ -40,7 +39,7 @@ if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR);
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(express.static(PUBLIC_DIR));
 
-// -------------------- Multer (PDF uploads only) --------------------
+// -------------------- Multer --------------------
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, UPLOADS_DIR),
     filename: (req, file, cb) => {
@@ -129,63 +128,63 @@ async function createZoomMeeting(doctorEmail, dateTime) {
 
 // -------------------- Initialize Tables --------------------
 (async () => {
-    await pool.query(`
-    CREATE TABLE IF NOT EXISTS users (
-      user_id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT UNIQUE NOT NULL,
-      password TEXT NOT NULL,
-      role TEXT NOT NULL CHECK(role IN ('doctor','patient')),
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS doctors (
-      doctor_id SERIAL PRIMARY KEY,
-      user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-      specialization TEXT,
-      availability TEXT,
-      contact TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS appointments (
-      appointment_id SERIAL PRIMARY KEY,
-      patient_id INTEGER REFERENCES users(user_id),
-      doctor_id INTEGER REFERENCES doctors(doctor_id),
-      date_time TEXT NOT NULL,
-      status TEXT DEFAULT 'scheduled',
-      zoom_link TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS prescriptions (
-      prescription_id SERIAL PRIMARY KEY,
-      appointment_id INTEGER REFERENCES appointments(appointment_id),
-      file_path TEXT NOT NULL,
-      uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `);
-
-    const { rows } = await pool.query('SELECT COUNT(*) FROM users');
-    if (Number(rows[0].count) === 0) {
-        const docPass = bcrypt.hashSync('doctor123', 10);
-        const patPass = bcrypt.hashSync('patient123', 10);
-
-        const doctor = await pool.query(
-            `INSERT INTO users (name,email,password,role) VALUES ($1,$2,$3,$4) RETURNING user_id`,
-            ['Dr. Raj', 'doctor@example.com', docPass, 'doctor']
+    try {
+        await pool.query(`
+        CREATE TABLE IF NOT EXISTS users (
+            user_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            role TEXT NOT NULL CHECK(role IN ('doctor','patient')),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
-        await pool.query(
-            `INSERT INTO doctors (user_id,specialization,availability,contact)
-       VALUES ($1,$2,$3,$4)`,
-            [doctor.rows[0].user_id, 'General Physician', 'Mon-Fri 10:00-16:00', '9876543210']
+        CREATE TABLE IF NOT EXISTS doctors (
+            doctor_id SERIAL PRIMARY KEY,
+            user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
+            specialization TEXT,
+            availability TEXT,
+            contact TEXT
         );
-
-        await pool.query(
-            `INSERT INTO users (name,email,password,role) VALUES ($1,$2,$3,$4)`,
-            ['Demo Patient', 'patient@example.com', patPass, 'patient']
+        CREATE TABLE IF NOT EXISTS appointments (
+            appointment_id SERIAL PRIMARY KEY,
+            patient_id INTEGER REFERENCES users(user_id),
+            doctor_id INTEGER REFERENCES doctors(doctor_id),
+            date_time TIMESTAMP NOT NULL,
+            status TEXT DEFAULT 'scheduled',
+            zoom_link TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+        CREATE TABLE IF NOT EXISTS prescriptions (
+            prescription_id SERIAL PRIMARY KEY,
+            appointment_id INTEGER REFERENCES appointments(appointment_id),
+            file_path TEXT NOT NULL,
+            uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`);
 
-        console.log('✅ Seeded demo accounts');
+        // Seed demo accounts if empty
+        const { rows } = await pool.query('SELECT COUNT(*) FROM users');
+        if (Number(rows[0].count) === 0) {
+            const docPass = bcrypt.hashSync('doctor123', 10);
+            const patPass = bcrypt.hashSync('patient123', 10);
+
+            const doctor = await pool.query(
+                `INSERT INTO users (name,email,password,role) VALUES ($1,$2,$3,$4) RETURNING user_id`,
+                ['Dr. Raj', 'doctor@example.com', docPass, 'doctor']
+            );
+            await pool.query(
+                `INSERT INTO doctors (user_id,specialization,availability,contact) VALUES ($1,$2,$3,$4)`,
+                [doctor.rows[0].user_id, 'General Physician', 'Mon-Fri 10:00-16:00', '9876543210']
+            );
+
+            await pool.query(
+                `INSERT INTO users (name,email,password,role) VALUES ($1,$2,$3,$4)`,
+                ['Demo Patient', 'patient@example.com', patPass, 'patient']
+            );
+
+            console.log('✅ Seeded demo accounts');
+        }
+    } catch (err) {
+        console.error('Error initializing tables:', err.message);
     }
 })();
 
@@ -203,11 +202,15 @@ function requireRole(role) {
 }
 
 // -------------------- API Routes --------------------
+
+// Session
 app.get('/api/session', (req, res) => res.json({ user: req.session.user || null }));
 
+// Register
 app.post('/api/register', async (req, res) => {
     const { name, email, password, role, specialization, availability, contact } = req.body;
     if (!name || !email || !password || !role) return res.status(400).json({ error: 'Missing fields' });
+
     const hashed = bcrypt.hashSync(password, 10);
     try {
         const userResult = await pool.query(
@@ -223,10 +226,12 @@ app.post('/api/register', async (req, res) => {
         res.json({ success: true, message: `${role} registered` });
     } catch (err) {
         if (err.message.includes('duplicate key')) return res.status(400).json({ error: 'Email already used' });
+        console.error('Register error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
+// Login
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ error: 'Missing fields' });
@@ -244,26 +249,29 @@ app.post('/api/login', async (req, res) => {
         req.session.user = sessionUser;
         res.json({ success: true, user: sessionUser });
     } catch (err) {
+        console.error('Login error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
-app.post('/api/logout', (req, res) => {
-    req.session.destroy(() => res.json({ success: true }));
-});
+// Logout
+app.post('/api/logout', (req, res) => req.session.destroy(() => res.json({ success: true })));
 
+// Get all doctors
 app.get('/api/doctors', async (req, res) => {
     try {
         const { rows } = await pool.query(`
-      SELECT d.doctor_id,d.specialization,d.availability,d.contact,u.name,u.email
-      FROM doctors d JOIN users u ON d.user_id = u.user_id
-    `);
+        SELECT d.doctor_id,d.specialization,d.availability,d.contact,u.name,u.email
+        FROM doctors d JOIN users u ON d.user_id = u.user_id
+        `);
         res.json({ doctors: rows });
-    } catch {
+    } catch (err) {
+        console.error('Doctors fetch error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
+// -------------------- Book Appointment --------------------
 app.post('/api/book-appointment', requireLogin, requireRole('patient'), async (req, res) => {
     const { doctor_id, date_time, with_zoom } = req.body;
     if (!doctor_id || !date_time) return res.status(400).json({ error: 'Missing fields' });
@@ -279,10 +287,13 @@ app.post('/api/book-appointment', requireLogin, requireRole('patient'), async (r
                 zoom_link = await createZoomMeeting(dr.rows[0].doctor_email, date_time);
         }
 
+        // Use proper timestamp
+        const dateISO = new Date(date_time).toISOString();
+
         const insert = await pool.query(
             `INSERT INTO appointments (patient_id,doctor_id,date_time,status,zoom_link)
-       VALUES ($1,$2,$3,'scheduled',$4) RETURNING appointment_id`,
-            [req.session.user.user_id, doctor_id, date_time, zoom_link]
+             VALUES ($1,$2,$3,'scheduled',$4) RETURNING appointment_id`,
+            [req.session.user.user_id, doctor_id, dateISO, zoom_link]
         );
 
         const drMail = await pool.query(
@@ -294,43 +305,49 @@ app.post('/api/book-appointment', requireLogin, requireRole('patient'), async (r
 
         res.json({ success: true, appointment_id: insert.rows[0].appointment_id, zoom_link });
     } catch (err) {
-        res.status(500).json({ error: 'DB error' });
+        console.error('Book appointment error:', err);
+        res.status(500).json({ error: err.message });
     }
 });
 
+// -------------------- Patient Appointments --------------------
 app.get('/api/patient/appointments', requireLogin, requireRole('patient'), async (req, res) => {
     try {
         const { rows } = await pool.query(`
-      SELECT a.appointment_id,a.date_time,a.status,u.name as doctor_name,d.specialization,p.file_path,a.zoom_link
-      FROM appointments a
-      JOIN doctors d ON a.doctor_id = d.doctor_id
-      JOIN users u ON d.user_id = u.user_id
-      LEFT JOIN prescriptions p ON a.appointment_id = p.appointment_id
-      WHERE a.patient_id = $1
-      ORDER BY a.date_time DESC
-    `, [req.session.user.user_id]);
+        SELECT a.appointment_id,a.date_time,a.status,u.name as doctor_name,d.specialization,p.file_path,a.zoom_link
+        FROM appointments a
+        JOIN doctors d ON a.doctor_id = d.doctor_id
+        JOIN users u ON d.user_id = u.user_id
+        LEFT JOIN prescriptions p ON a.appointment_id = p.appointment_id
+        WHERE a.patient_id = $1
+        ORDER BY a.date_time DESC
+        `, [req.session.user.user_id]);
         res.json({ appointments: rows });
-    } catch {
+    } catch (err) {
+        console.error('Patient appointments error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
+// -------------------- Doctor Appointments --------------------
 app.get('/api/doctor/appointments', requireLogin, requireRole('doctor'), async (req, res) => {
     try {
         const { rows } = await pool.query(`
-      SELECT a.appointment_id,a.date_time,a.status,u.name as patient_name,u.email as patient_email,p.file_path,a.zoom_link
-      FROM appointments a
-      JOIN users u ON a.patient_id = u.user_id
-      LEFT JOIN prescriptions p ON a.appointment_id = p.appointment_id
-      WHERE a.doctor_id = $1
-      ORDER BY a.date_time DESC
-    `, [req.session.user.doctor_id]);
+        SELECT a.appointment_id,a.date_time,a.status,u.name as patient_name,u.email as patient_email,p.file_path,a.zoom_link
+        FROM appointments a
+        JOIN users u ON a.patient_id = u.user_id
+        LEFT JOIN prescriptions p ON a.appointment_id = p.appointment_id
+        WHERE a.doctor_id = $1
+        ORDER BY a.date_time DESC
+        `, [req.session.user.doctor_id]);
         res.json({ appointments: rows });
-    } catch {
+    } catch (err) {
+        console.error('Doctor appointments error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
+// -------------------- Upload Prescription --------------------
 app.post('/api/doctor/upload-prescription', requireLogin, requireRole('doctor'), upload.single('prescription'), async (req, res) => {
     const { appointment_id } = req.body;
     if (!appointment_id) return res.status(400).json({ error: 'Missing appointment_id' });
@@ -342,25 +359,28 @@ app.post('/api/doctor/upload-prescription', requireLogin, requireRole('doctor'),
         await pool.query(`UPDATE appointments SET status='completed' WHERE appointment_id=$1`, [appointment_id]);
 
         const pat = await pool.query(`
-      SELECT u.email as patient_email FROM appointments a JOIN users u ON a.patient_id = u.user_id WHERE a.appointment_id=$1
-    `, [appointment_id]);
+        SELECT u.email as patient_email FROM appointments a JOIN users u ON a.patient_id = u.user_id WHERE a.appointment_id=$1
+        `, [appointment_id]);
         if (pat.rows[0])
             sendNotification({ to: pat.rows[0].patient_email, subject: 'Prescription uploaded', text: `Prescription for appointment ${appointment_id} is ready.` });
 
         res.json({ success: true, file: fp });
-    } catch {
+    } catch (err) {
+        console.error('Upload prescription error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
 
+// -------------------- Get Prescription --------------------
 app.get('/api/prescription/:appointment_id', requireLogin, async (req, res) => {
     try {
         const { rows } = await pool.query(`
-      SELECT * FROM prescriptions WHERE appointment_id=$1 ORDER BY uploaded_at DESC LIMIT 1
-    `, [req.params.appointment_id]);
+        SELECT * FROM prescriptions WHERE appointment_id=$1 ORDER BY uploaded_at DESC LIMIT 1
+        `, [req.params.appointment_id]);
         if (rows.length === 0) return res.status(404).json({ error: 'No prescription found' });
         res.json({ prescription: rows[0] });
-    } catch {
+    } catch (err) {
+        console.error('Get prescription error:', err);
         res.status(500).json({ error: 'DB error' });
     }
 });
