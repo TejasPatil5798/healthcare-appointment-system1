@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const path = require('path');
@@ -12,6 +11,19 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
+//=================================
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
+module.exports = pool;
+
+
 
 // ---------------- Middleware ----------------
 app.use(express.json());
@@ -125,10 +137,13 @@ if (!fs.existsSync(DATA_DIR)) {
 }
 const DB_FILE = path.join(DATA_DIR, 'database.sqlite');
 
-const db = new sqlite3.Database(DB_FILE, (err) => {
-    if (err) console.error('DB open error:', err);
-    else console.log('✅ SQLite DB connected at', DB_FILE);
+const path = require('path');
+const dbPath = path.join(__dirname, 'database.sqlite');
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) console.error('Database connection error:', err);
+    else console.log('Connected to SQLite database');
 });
+
 
 // ---------------- Schema & Seed Data ----------------
 db.serialize(() => {

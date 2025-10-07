@@ -52,7 +52,7 @@
                         ${a.zoom_link ? `<h4><a href="${a.zoom_link}" target="_blank">Join Zoom Meeting</a></h4>` : ''}
                         ${a.file_path ? `<h4><a href="${a.file_path}" target="_blank">Prescription (PDF)</a></h4>` : `
                             <form class="uploadForm" data-appointment="${a.appointment_id}" enctype="multipart/form-data">
-                                <label>Upload prescription (PDF): <input type="file" name="prescription" accept="application/pdf" required></label>
+                                <label>Upload prescription (PDF): <span></span> <input type="file" name="prescription" accept="application/pdf" required></label>
                                 <button type="submit">Upload</button>
                             </form>
                         `}
