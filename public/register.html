@@ -37,6 +37,19 @@
         .time-select label {
             font-size: 14px;
         }
+
+        #msg {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #msg.error {
+            color: red;
+        }
+
+        #msg.success {
+            color: green;
+        }
     </style>
 </head>
 
@@ -52,9 +65,17 @@
         <main>
             <h1>Register</h1>
             <form id="registerForm">
-                <label><span>Name:</span> <input name="name" required></label><br>
-                <label><span>Email:</span> <input name="email" type="email" required></label><br>
-                <label><span>Password:</span> <input name="password" type="password" required></label><br>
+                <label><span>Name:</span>
+                    <input name="name" id="name" required placeholder="Enter full name">
+                </label><br>
+
+                <label><span>Email:</span>
+                    <input name="email" type="email" required>
+                </label><br>
+
+                <label><span>Password:</span>
+                    <input name="password" type="password" required>
+                </label><br>
 
                 <label><span>Role:</span>
                     <select name="role" id="roleSelect">
@@ -62,232 +83,6 @@
                         <option value="doctor">Doctor</option>
                     </select>
                 </label><br>
-                <!doctype html>
-                <html>
-
-                <head>
-                    <meta charset="utf-8" />
-                    <meta name="viewport" content="width=device-width,initial-scale=1" />
-                    <title>Register</title>
-                    <link rel="stylesheet" href="/css/style.css">
-                    <style>
-                        .availability-section {
-                            border: 1px solid #ccc;
-                            padding: 10px;
-                            margin-top: 8px;
-                            border-radius: 8px;
-                            background: #f9f9f9;
-                        }
-
-                        .weekday {
-                            display: flex;
-                            flex-wrap: wrap;
-                            gap: 10px;
-                            margin-bottom: 10px;
-                        }
-
-                        .weekday label {
-                            display: flex;
-                            align-items: center;
-                            gap: 4px;
-                        }
-
-                        .time-select {
-                            display: flex;
-                            align-items: center;
-                            gap: 10px;
-                        }
-
-                        .time-select label {
-                            font-size: 14px;
-                        }
-
-                        #msg {
-                            margin-top: 10px;
-                            font-weight: bold;
-                        }
-
-                        #msg.error {
-                            color: red;
-                        }
-
-                        #msg.success {
-                            color: green;
-                        }
-                    </style>
-                </head>
-
-                <body class="other-hero">
-                    <nav>
-                        <h2>OMKAR HOSPITAL</h2>
-                        <div class="in-nav">
-                            <a href="/">Home</a> | <a href="/login.html">Login</a>
-                        </div>
-                    </nav>
-
-                    <div class="in-main">
-                        <main>
-                            <h1>Register</h1>
-                            <form id="registerForm">
-                                <label><span>Name:</span>
-                                    <input name="name" id="name" required placeholder="Enter full name">
-                                </label><br>
-
-                                <label><span>Email:</span>
-                                    <input name="email" type="email" required>
-                                </label><br>
-
-                                <label><span>Password:</span>
-                                    <input name="password" type="password" required>
-                                </label><br>
-
-                                <label><span>Role:</span>
-                                    <select name="role" id="roleSelect">
-                                        <option value="patient">Patient</option>
-                                        <option value="doctor">Doctor</option>
-                                    </select>
-                                </label><br>
-
-                                <div id="doctorFields" style="display:none;">
-                                    <label>Specialization:
-                                        <input name="specialization" id="specialization"
-                                            placeholder="e.g. Cardiologist">
-                                    </label><br>
-
-                                    <div class="availability-section">
-                                        <label><strong>Availability:</strong></label>
-                                        <div class="weekday">
-                                            <label><input type="checkbox" value="Mon"> Mon</label>
-                                            <label><input type="checkbox" value="Tue"> Tue</label>
-                                            <label><input type="checkbox" value="Wed"> Wed</label>
-                                            <label><input type="checkbox" value="Thu"> Thu</label>
-                                            <label><input type="checkbox" value="Fri"> Fri</label>
-                                            <label><input type="checkbox" value="Sat"> Sat</label>
-                                            <label><input type="checkbox" value="Sun"> Sun</label>
-                                        </div>
-
-                                        <div class="time-select">
-                                            <label>From: <input type="time" id="startTime"></label>
-                                            <label>To: <input type="time" id="endTime"></label>
-                                        </div>
-                                    </div>
-
-                                    <label>Contact:
-                                        <input name="contact" id="contact" maxlength="10" placeholder="10-digit number">
-                                    </label><br>
-                                </div>
-
-                                <button type="submit">Register</button>
-                            </form>
-
-                            <div id="msg"></div>
-                        </main>
-                    </div>
-
-                    <footer>
-                        <p>copyrights @ Omkar Hospital</p>
-                        <p>Designed & Developed by Kavya infoweb pvt. ltd.</p>
-                    </footer>
-
-                    <script>
-                        const roleSelect = document.getElementById('roleSelect');
-                        const doctorFields = document.getElementById('doctorFields');
-                        const specializationInput = document.getElementById('specialization');
-                        const contactInput = document.getElementById('contact');
-                        const nameInput = document.getElementById('name');
-                        const msg = document.getElementById('msg');
-
-                        roleSelect.addEventListener('change', (e) => {
-                            doctorFields.style.display = e.target.value === 'doctor' ? 'block' : 'none';
-                        });
-
-                        // --- Live Input Restrictions ---
-                        nameInput.addEventListener('input', () => {
-                            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
-                        });
-
-                        specializationInput.addEventListener('input', () => {
-                            specializationInput.value = specializationInput.value.replace(/[^a-zA-Z\s]/g, '');
-                        });
-
-                        contactInput.addEventListener('input', () => {
-                            contactInput.value = contactInput.value.replace(/\D/g, '').slice(0, 10);
-                        });
-
-                        // --- Helper to show messages ---
-                        function showMessage(text, type = 'error') {
-                            msg.innerText = text;
-                            msg.className = type;
-                        }
-
-                        // --- Form Submit ---
-                        document.getElementById('registerForm').addEventListener('submit', async (e) => {
-                            e.preventDefault();
-                            const f = e.target;
-                            const role = f.role.value;
-
-                            // --- Validate Name ---
-                            const name = f.name.value.trim();
-                            if (!/^[A-Za-z\s]{2,}$/.test(name)) {
-                                showMessage('Please enter a valid name (only letters, min 2 characters).');
-                                return;
-                            }
-
-                            let availability = '';
-                            if (role === 'doctor') {
-                                const specialization = f.specialization.value.trim();
-                                const contact = f.contact.value.trim();
-                                const startTime = document.getElementById('startTime').value;
-                                const endTime = document.getElementById('endTime').value;
-                                const days = Array.from(document.querySelectorAll('.weekday input:checked')).map(d => d.value);
-
-                                // --- Doctor-specific Validation ---
-                                if (!/^[a-zA-Z\s]+$/.test(specialization)) {
-                                    showMessage('Specialization should only contain letters.');
-                                    return;
-                                }
-                                if (!/^\d{10}$/.test(contact)) {
-                                    showMessage('Contact number must be exactly 10 digits.');
-                                    return;
-                                }
-                                if (days.length === 0) {
-                                    showMessage('Please select at least one available day.');
-                                    return;
-                                }
-                                if (!startTime || !endTime) {
-                                    showMessage('Please select both start and end time.');
-                                    return;
-                                }
-
-                                availability = `${days.join(', ')} ${startTime}-${endTime}`;
-                            }
-
-                            // --- Send to backend ---
-                            const data = {
-                                name,
-                                email: f.email.value,
-                                password: f.password.value,
-                                role,
-                                specialization: f.specialization ? f.specialization.value : '',
-                                availability,
-                                contact: f.contact ? f.contact.value : ''
-                            };
-
-                            const res = await fetch('/api/register', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(data)
-                            });
-
-                            const j = await res.json();
-                            if (j.error) return showMessage(j.error, 'error');
-                            showMessage(j.message || 'Registered successfully!', 'success');
-                            if (j.success || j.message) setTimeout(() => location.href = '/login.html', 1200);
-                        });
-                    </script>
-                </body>
-
-                </html>
 
                 <div id="doctorFields" style="display:none;">
                     <label>Specialization:
@@ -319,6 +114,7 @@
 
                 <button type="submit">Register</button>
             </form>
+
             <div id="msg"></div>
         </main>
     </div>
@@ -333,12 +129,18 @@
         const doctorFields = document.getElementById('doctorFields');
         const specializationInput = document.getElementById('specialization');
         const contactInput = document.getElementById('contact');
+        const nameInput = document.getElementById('name');
+        const msg = document.getElementById('msg');
 
         roleSelect.addEventListener('change', (e) => {
             doctorFields.style.display = e.target.value === 'doctor' ? 'block' : 'none';
         });
 
-        // --- Live input restriction ---
+        // --- Live Input Restrictions ---
+        nameInput.addEventListener('input', () => {
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
         specializationInput.addEventListener('input', () => {
             specializationInput.value = specializationInput.value.replace(/[^a-zA-Z\s]/g, '');
         });
@@ -347,11 +149,24 @@
             contactInput.value = contactInput.value.replace(/\D/g, '').slice(0, 10);
         });
 
+        // --- Helper to show messages ---
+        function showMessage(text, type = 'error') {
+            msg.innerText = text;
+            msg.className = type;
+        }
+
         // --- Form Submit ---
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const f = e.target;
             const role = f.role.value;
+
+            // --- Validate Name ---
+            const name = f.name.value.trim();
+            if (!/^[A-Za-z\s]{2,}$/.test(name)) {
+                showMessage('Please enter a valid name (only letters, min 2 characters).');
+                return;
+            }
 
             let availability = '';
             if (role === 'doctor') {
@@ -361,29 +176,30 @@
                 const endTime = document.getElementById('endTime').value;
                 const days = Array.from(document.querySelectorAll('.weekday input:checked')).map(d => d.value);
 
-                // --- Validation ---
+                // --- Doctor-specific Validation ---
                 if (!/^[a-zA-Z\s]+$/.test(specialization)) {
-                    document.getElementById('msg').innerText = 'Specialization should only contain letters.';
+                    showMessage('Specialization should only contain letters.');
                     return;
                 }
                 if (!/^\d{10}$/.test(contact)) {
-                    document.getElementById('msg').innerText = 'Contact number must be exactly 10 digits.';
+                    showMessage('Contact number must be exactly 10 digits.');
                     return;
                 }
                 if (days.length === 0) {
-                    document.getElementById('msg').innerText = 'Please select at least one available day.';
+                    showMessage('Please select at least one available day.');
                     return;
                 }
                 if (!startTime || !endTime) {
-                    document.getElementById('msg').innerText = 'Please select both start and end time.';
+                    showMessage('Please select both start and end time.');
                     return;
                 }
 
                 availability = `${days.join(', ')} ${startTime}-${endTime}`;
             }
 
+            // --- Send to backend ---
             const data = {
-                name: f.name.value,
+                name,
                 email: f.email.value,
                 password: f.password.value,
                 role,
@@ -399,7 +215,8 @@
             });
 
             const j = await res.json();
-            document.getElementById('msg').innerText = j.error || j.message || 'Registered';
+            if (j.error) return showMessage(j.error, 'error');
+            showMessage(j.message || 'Registered successfully!', 'success');
             if (j.success || j.message) setTimeout(() => location.href = '/login.html', 1200);
         });
     </script>
