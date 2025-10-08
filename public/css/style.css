@@ -161,6 +161,13 @@ footer {
     padding: 0 20px;
 }
 
+#bookMsg{
+    margin: 15px auto;
+    font-size: 22px;
+    font-weight: 800;
+    color: green;
+}
+
 
 
 /* ==== */
@@ -205,9 +212,8 @@ footer {
 }
 
 .doctor-body {
-    height: 100vh;
-    /* background: url("/images/Doctor.jpg") no-repeat center/cover; */
-    background: linear-gradient(135deg, #81c7fd, #200474);
+    min-height: 100vh;
+    background: #81c7fd;
 }
 
 .dr-main{
@@ -216,7 +222,7 @@ footer {
 
 .patient-body {
     height: auto;
-    background: url("/images/patient.jpg") no-repeat center/cover;
+    background: #81c7fd;
 }
 
 form{
