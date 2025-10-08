@@ -1,82 +1,80 @@
-<!doctype html>
-<html>
+<script src="/js/app.js"></script>
+<script>
+    async function ensureDoctor() {
+        const s = await (await fetch('/api/session')).json();
+        if (!s.user) return location.href = '/login.html';
+        if (s.user.role !== 'doctor') return location.href = '/patient.html';
+        document.getElementById('logoutLink').addEventListener('click', async () => {
+            await fetch('/api/logout', { method: 'POST' });
+            location.href = '/';
+        });
+    }
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    // ✅ Convert ISO to human-readable date/time
+    function formatDateTime(isoString) {
+        if (!isoString) return 'Not specified';
+        const date = new Date(isoString);
+        return date.toLocaleString('en-IN', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+            timeZone: 'Asia/Kolkata'
+        });
+    }
 
-<body class="doctor-body">
-    <nav>
-        <h2>OMKAR HOSPITAL</h2>
-        <div class="in-nav">
-            <a href="/">Home</a> | <a href="#" id="logoutLink">Logout</a>
-        </div>
-    
-    </nav>
-    <main class="dr-main">
-        <h1>Doctor Dashboard</h1>
+    async function loadAppointments() {
+        const res = await fetch('/api/doctor/appointments');
+        const j = await res.json();
+        const container = document.getElementById('appointmentsList');
 
-        <section>
-            <h2>Your Appointments</h2>
-            <div id="appointmentsList">Loading...</div>
-        </section>
-    </main>
-
-    <footer>
-        <p>copyrights @ Omkar Hospital</p>
-        <p>Designed & Developed by Kavya infoweb pvt. ltd.</p>
-    </footer>
-
-    <script src="/js/app.js"></script>
-    <script>
-        async function ensureDoctor() {
-            const s = await (await fetch('/api/session')).json();
-            if (!s.user) return location.href = '/login.html';
-            if (s.user.role !== 'doctor') return location.href = '/patient.html';
-            document.getElementById('logoutLink').addEventListener('click', async () => { await fetch('/api/logout', { method: 'POST' }); location.href = '/'; });
+        if (!j.appointments || j.appointments.length === 0) {
+            container.innerText = 'No appointments yet.';
+            return;
         }
 
-        async function loadAppointments() {
-                        const res = await fetch('/api/doctor/appointments');
-                        const j = await res.json();
-                        const container = document.getElementById('appointmentsList');
-                        if (!j.appointments || j.appointments.length === 0) container.innerText = 'No appointments yet.';
-                        else {
-                                container.innerHTML = j.appointments.map(a => `
-                    <div class="appointment">
-                        <p><strong>Patient:</strong> ${a.patient_name} (${a.patient_email})</p>
-                        <p><strong>When:</strong> ${a.date_time}</p>
-                        <p><strong>Status:</strong> ${a.status}</p>
-                        ${a.zoom_link ? `<h4><a href="${a.zoom_link}" target="_blank">Join Zoom Meeting</a></h4>` : ''}
-                        ${a.file_path ? `<h4><a href="${a.file_path}" target="_blank">Prescription (PDF)</a></h4>` : `
-                            <form class="uploadForm" data-appointment="${a.appointment_id}" enctype="multipart/form-data">
-                                <label>Upload prescription (PDF): <span></span> <input type="file" name="prescription" accept="application/pdf" required></label>
-                                <button type="submit">Upload</button>
-                            </form>
-                        `}
-                    </div>
-                `).join('');
+        container.innerHTML = j.appointments.map(a => `
+      <div class="appointment">
+        <p><strong>Patient:</strong> ${a.patient_name} (${a.patient_email})</p>
+        <p><strong>When:</strong> ${formatDateTime(a.date_time)}</p>
+        <p><strong>Status:</strong> ${a.status}</p>
+        ${a.zoom_link ? `<h4><a href="${a.zoom_link}" target="_blank">Join Zoom Meeting</a></h4>` : ''}
+        ${a.file_path ? `<h4><a href="${a.file_path}" target="_blank">Prescription (PDF)</a></h4>` : `
+          <form class="uploadForm" data-appointment="${a.appointment_id}" enctype="multipart/form-data">
+            <label>Upload prescription (PDF): <span></span>
+              <input type="file" name="prescription" accept="application/pdf" required>
+            </label>
+            <button type="submit">Upload</button>
+          </form>
+        `}
+      </div>
+    `).join('');
 
-                document.querySelectorAll('.uploadForm').forEach(form => {
-                    form.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const appointment_id = form.dataset.appointment;
-                        const fd = new FormData(form);
-                        fd.append('appointment_id', appointment_id);
-                        const res = await fetch('/api/doctor/upload-prescription', { method: 'POST', body: fd });
-                        const j = await res.json();
-                        if (j.success) { alert('Uploaded'); loadAppointments(); }
-                        else alert(j.error || 'Upload failed');
-                    });
-                });
-            }
-        }
+        // ✅ Handle prescription uploads
+        document.querySelectorAll('.uploadForm').forEach(form => {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const appointment_id = form.dataset.appointment;
+                const fd = new FormData(form);
+                fd.append('appointment_id', appointment_id);
 
-        (async () => { await ensureDoctor(); await loadAppointments(); })();
-    </script>
-</body>
+                const res = await fetch('/api/doctor/upload-prescription', { method: 'POST', body: fd });
+                const j = await res.json();
+                if (j.success) {
+                    alert('Prescription uploaded successfully!');
+                    loadAppointments();
+                } else {
+                    alert(j.error || 'Upload failed');
+                }
+            });
+        });
+    }
 
-</html>
+    (async () => {
+        await ensureDoctor();
+        await loadAppointments();
+    })();
+</script>
