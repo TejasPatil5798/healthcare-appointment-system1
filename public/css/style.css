@@ -61,7 +61,7 @@ nav a {
 .other-hero {
     height: 100vh;
     /* background: url("/images/brandon-holmes-GofYo51GQ_4-unsplash.jpg") no-repeat center/cover; */
-    background: #adcaff;
+    background: #6a8bc7;
 }
 
 .hero h1 {
@@ -154,7 +154,7 @@ footer {
     display: flex;
     justify-content: space-between;
     height: 50px;
-    /* margin-top: 20px; */
+    margin-top: 20px;
     background-color: #054fd9;
     color: white;
     align-self: self-end;
