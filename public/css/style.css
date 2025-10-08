@@ -158,6 +158,7 @@ footer {
     color: white;
     align-self: self-end;
     margin-bottom: 0;
+    padding: 0 20px;
 }
 
 
@@ -205,7 +206,8 @@ footer {
 
 .doctor-body {
     height: 100vh;
-    background: url("/images/Doctor.jpg") no-repeat center/cover;
+    /* background: url("/images/Doctor.jpg") no-repeat center/cover; */
+    background: linear-gradient(135deg, #81c7fd, #200474);
 }
 
 .dr-main{
@@ -302,5 +304,12 @@ form label{
 
     .in-main {
         height: max-content
+    }
+
+    footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
     }
 }
