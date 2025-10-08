@@ -15,6 +15,7 @@
             <a href="/">Home</a> | <a href="/login.html">Login</a>
         </div>
     </nav>
+
     <div class="in-main">
         <main>
             <h1>Register</h1>
@@ -22,6 +23,7 @@
                 <label><span>Name:</span> <input name="name" required></label><br>
                 <label><span>Email:</span> <input name="email" type="email" required></label><br>
                 <label><span>Password:</span> <input name="password" type="password" required></label><br>
+
                 <label><span>Role:</span>
                     <select name="role" id="roleSelect">
                         <option value="patient">Patient</option>
@@ -30,9 +32,15 @@
                 </label><br>
 
                 <div id="doctorFields" style="display:none;">
-                    <label>Specialization: <input name="specialization"></label><br>
-                    <label>Availability: <input name="availability" placeholder="e.g. Mon-Fri 10:00-16:00"></label><br>
-                    <label>Contact: <input name="contact"></label><br>
+                    <label>Specialization:
+                        <input name="specialization" id="specialization" placeholder="e.g. Cardiologist">
+                    </label><br>
+                    <label>Availability:
+                        <input name="availability" placeholder="e.g. Mon-Fri 10:00-16:00">
+                    </label><br>
+                    <label>Contact:
+                        <input name="contact" id="contact" maxlength="10" placeholder="10-digit number">
+                    </label><br>
                 </div>
 
                 <button type="submit">Register</button>
@@ -40,6 +48,7 @@
             <div id="msg"></div>
         </main>
     </div>
+
     <footer>
         <p>copyrights @ Omkar Hospital</p>
         <p>Designed & Developed by Kavya infoweb pvt. ltd.</p>
@@ -47,23 +56,66 @@
 
     <script src="/js/app.js"></script>
     <script>
-        document.getElementById('roleSelect').addEventListener('change', (e) => {
-            document.getElementById('doctorFields').style.display = e.target.value === 'doctor' ? 'block' : 'none';
+        const roleSelect = document.getElementById('roleSelect');
+        const doctorFields = document.getElementById('doctorFields');
+        const specializationInput = document.getElementById('specialization');
+        const contactInput = document.getElementById('contact');
+
+        // Show doctor fields only when doctor role selected
+        roleSelect.addEventListener('change', (e) => {
+            doctorFields.style.display = e.target.value === 'doctor' ? 'block' : 'none';
         });
 
+        // --- Live Input Restrictions ---
+
+        // Only allow alphabets for specialization
+        specializationInput.addEventListener('input', () => {
+            specializationInput.value = specializationInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+        // Only allow digits for contact number and limit to 10
+        contactInput.addEventListener('input', () => {
+            contactInput.value = contactInput.value.replace(/\D/g, '').slice(0, 10);
+        });
+
+        // --- Form Submit Validation ---
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const f = e.target;
+            const role = f.role.value;
+
+            // Doctor-specific validation
+            if (role === 'doctor') {
+                const specialization = f.specialization.value.trim();
+                const contact = f.contact.value.trim();
+
+                if (!/^[a-zA-Z\s]+$/.test(specialization)) {
+                    document.getElementById('msg').innerText = 'Specialization should only contain letters.';
+                    return;
+                }
+
+                if (!/^\d{10}$/.test(contact)) {
+                    document.getElementById('msg').innerText = 'Contact number must be exactly 10 digits.';
+                    return;
+                }
+            }
+
             const data = {
                 name: f.name.value,
                 email: f.email.value,
                 password: f.password.value,
-                role: f.role.value,
+                role,
                 specialization: f.specialization ? f.specialization.value : '',
                 availability: f.availability ? f.availability.value : '',
                 contact: f.contact ? f.contact.value : ''
             };
-            const res = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
             const j = await res.json();
             document.getElementById('msg').innerText = j.error || j.message || 'Registered';
             if (j.success || j.message) setTimeout(() => location.href = '/login.html', 1200);
