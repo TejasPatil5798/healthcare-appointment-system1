@@ -59,7 +59,7 @@ nav a {
 }
 
 .other-hero {
-    height: 100vh;
+    height: auto;
     background: url("/images/brandon-holmes-GofYo51GQ_4-unsplash.jpg") no-repeat center/cover;
 }
 
