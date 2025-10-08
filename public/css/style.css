@@ -310,7 +310,7 @@ form label{
     }
 
     .in-main {
-        height: max-content
+        min-height: max-content
     }
 
     footer{
