@@ -52,7 +52,7 @@ nav a {
 }
 
 .hero {
-    background: url("/public/images/stethoscope.jpg") no-repeat center/cover;
+    background: url("images/stethoscope.jpg") no-repeat center/cover;
     height: auto;
     width: 100%;
     margin-top: 0;
@@ -105,7 +105,7 @@ nav a {
 
 .content {
     padding: 20px 60px;
-    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 .content-form {
@@ -114,7 +114,7 @@ nav a {
     /* background: rgb(104, 104, 104); */
     min-height: 77vh;
     padding: 20px 60px;
-    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
@@ -171,6 +171,14 @@ input[type=submit] {
     margin: 0 auto;
 }
 
+input[type=submit]:hover{
+    transform: translateY(5px);
+}
+
+button:hover{
+    transform: translateY(5px);
+}
+
 input,
 select {
     padding: 6px 8px;
@@ -207,6 +215,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     align-items: stretch;
+    background: white;
 }
 
 .main-form {
@@ -218,7 +227,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
+    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.04);
 }
 
 .logo h2 {
