@@ -65,7 +65,7 @@ nav a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #265daa6d, #0000006d);
     z-index: 1;
 }
 
@@ -104,8 +104,12 @@ nav a {
 }
 
 .content {
+    background: linear-gradient(-45deg, #969cff, #edcfff, #ffa5ef, #ffcbe3);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     padding: 20px 60px;
-    background: url('images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    border-radius: 0;
+    /* background: url('images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover; */
 }
 
 .content-form {
@@ -147,16 +151,18 @@ main h1 {
     background: white;
     border-radius: 6px;
     width: 95%;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.4);
 }
 
 .doctor:hover {
     transform: translateY(-4px);
+    transition: 0.4 ease-in-out;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .appointment:hover {
     transform: translateY(-4px);
+    transition: 0.4 ease-in-out;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -172,12 +178,14 @@ input[type=submit] {
     margin: 0 auto;
 }
 
-input[type=submit]:hover{
+input[type=submit]:hover {
+    transition: 0.4 ease-in-out;
     transform: translateY(-5px);
 }
 
-button:hover{
+button:hover {
     transform: translateY(-5px);
+    transition: 0.4 ease-in-out;
 }
 
 input,
@@ -239,13 +247,35 @@ footer {
     display: flex;
 }
 
-#doctorFields input{
+#doctorFields input {
     margin-left: 10px;
 }
 
 .right-sec {
+    background: linear-gradient(-45deg, #000dff, #af27fe, #ff00d0, #ff0073);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.right-sec {
     padding: 20px;
-    background: linear-gradient(135deg, #005698, #eb90b2);
     display: flex;
     min-width: 250px;
     flex-direction: column;
@@ -466,11 +496,11 @@ form label {
         display: block;
     }
 
-    #doctorFields input{
+    #doctorFields input {
         margin: 10px 0;
     }
 
-    .in-nav{
+    .in-nav {
         display: flex;
     }
 }

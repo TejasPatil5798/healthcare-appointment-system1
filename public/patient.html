@@ -12,7 +12,7 @@
     <nav>
         <h2>OMKAR HOSPITAL</h2>
         <div class="in-nav">
-            <a href="/">Home</a> | <a href="#" id="logoutLink">Logout</a>
+            <a href="/">Home</a> <a href="#" id="logoutLink">Logout</a>
         </div>
     </nav>
 
@@ -23,13 +23,13 @@
             <section>
                 <h2>Book an appointment</h2>
                 <form id="bookForm">
-                    <label>Doctor:
+                    <label><strong>Doctor:  </strong>
                         <select id="doctorSelect"></select>
                     </label><br>
-                    <label>Date & time:
+                    <label><strong>Date & time:  </strong>
                         <input type="datetime-local" id="datetime" required>
                     </label><br>
-                    <label><input type="checkbox" id="zoomOption"> Book with Zoom meeting</label><br>
+                    <label><input type="checkbox" id="zoomOption"> <strong>  Book with Zoom meeting</strong> </label><br>
                     <button type="submit">Book</button>
                 </form>
                 <div id="bookMsg"></div>
