@@ -88,11 +88,13 @@ nav a {
     max-width: 600px;
     position: relative;
     z-index: 5;
+    margin: 0 0;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .content {
     padding: 20px 60px;
+    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
@@ -158,7 +160,7 @@ footer {
     display: flex;
     justify-content: space-between;
     height: 50px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     background-color: #054fd9;
     color: white;
     align-self: self-end;
@@ -179,7 +181,6 @@ footer {
     /* 2 equal-width columns */
     gap: 30px;
     /* space between cards */
-    
     align-items: stretch;
 }
 
@@ -297,6 +298,15 @@ form label {
 
     .bottom-line {
         text-align: center;
+    }
+
+    #doctorsList {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        /* 2 equal-width columns */
+        gap: 30px;
+        /* space between cards */
+        align-items: stretch;
     }
 }
 
