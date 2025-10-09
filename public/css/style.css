@@ -144,6 +144,7 @@ main h1 {
     border: 1px solid #0055ff;
     padding: 12px;
     margin: 12px 0;
+    background: white;
     border-radius: 6px;
     width: 95%;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.6);
@@ -172,11 +173,11 @@ input[type=submit] {
 }
 
 input[type=submit]:hover{
-    transform: translateY(5px);
+    transform: translateY(-5px);
 }
 
 button:hover{
-    transform: translateY(5px);
+    transform: translateY(-5px);
 }
 
 input,
@@ -215,7 +216,6 @@ footer {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     align-items: stretch;
-    background: white;
 }
 
 .main-form {
