@@ -9,7 +9,7 @@ body {
     padding: 0;
     background: #81c7fd;
     color: #111;
-    width: 100%;
+    /* width: 100%; */
     height: auto;
 }
 
@@ -91,9 +91,13 @@ nav a {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+.content{
+    padding: 20px 60px;
+}
+
 main {
     padding: 18px;
-    max-width: 600px;
+    /* width: 100%; */
     margin: 18px auto;
     background: #adcaff;
     border-radius: 8px;
