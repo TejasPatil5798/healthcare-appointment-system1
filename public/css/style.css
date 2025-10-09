@@ -108,7 +108,7 @@ nav a {
 main {
     padding: 18px;
     /* width: 100%; */
-    margin: 18px auto;
+    margin: 0 auto;
     background: #adcaff;
     border-radius: 8px;
     display: flex;
@@ -175,7 +175,8 @@ footer {
     color: green;
 }
 
-#doctorsList {
+#doctorsList,
+#appointmentsList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
@@ -263,11 +264,13 @@ footer {
 
 .doctor-body {
     min-height: 100vh;
-    background: #81c7fd;
+    background: linear-gradient(to left, #111, #0bf6d7, #111);
 }
 
 .dr-main {
     min-height: 100vh;
+    width: 80%;
+    margin: 20px auto;
 }
 
 .patient-body {
@@ -289,8 +292,15 @@ form label {
     justify-content: center;
 }
 
+#appointmentsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+    align-items: stretch;
+}
 
-/* ...existing code... */
+
 
 /* Responsive styles */
 @media (max-width: 600px) {
@@ -306,7 +316,6 @@ form label {
     }
 
     .in-main,
-    main,
     form {
         width: 100% !important;
         box-sizing: border-box;
@@ -335,7 +344,8 @@ form label {
         text-align: center;
     }
 
-    #doctorsList {
+    #doctorsList,
+    #appointmentsList {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         /* 2 equal-width columns */
@@ -391,4 +401,14 @@ form label {
     .right-sec {
         border-radius: 20px 20px 0 0;
     }
+
+    #appointmentsList{
+        grid-template-columns: 1fr;
+    }
+
+    .dr-main {
+    min-height: 100vh;
+    width: 90%;
+    margin: 20px auto;
+}
 }
