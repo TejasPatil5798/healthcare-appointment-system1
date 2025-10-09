@@ -5,16 +5,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Healthcare App - Home</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
-    <nav>
-        <h2>OMKAR HOSPITAL</h2>
-        <div class="in-nav">
-            <span id="nav-links"><a href="/login.html">Login</a> | <a href="/public/register.html">Register</a></span>
+    <nav class="navbar">
+        <h2 class="logo">OMKAR HOSPITAL</h2>
+
+        <!-- Hamburger button -->
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
         </div>
 
+        <!-- Navigation links -->
+        <div class="in-nav" id="nav-links">
+            <a href="/login.html">Login</a> |
+            <a href="/public/register.html">Register</a>
+        </div>
     </nav>
 
     <section class="hero">
