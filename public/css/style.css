@@ -88,13 +88,21 @@ nav a {
     max-width: 600px;
     position: relative;
     z-index: 5;
-    margin: 0 0;
+    margin: 11% 0 0 0;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .content {
     padding: 20px 60px;
-    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+}
+
+.content-form {
+    display: flex;
+    align-items: center;
+    min-height: 77vh;
+    padding: 20px 60px;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
@@ -109,16 +117,8 @@ main {
     box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
 }
 
-.in-main {
-    height: 100%;
-}
-
 section {
     text-align: center;
-}
-
-section form label span {
-    margin-left: 20px;
 }
 
 main h1 {
@@ -178,10 +178,44 @@ footer {
 #doctorsList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 equal-width columns */
     gap: 30px;
-    /* space between cards */
     align-items: stretch;
+}
+
+.main-form {
+    /* padding: 18px; */
+    /* width: 100%; */
+    margin: 18px auto;
+    background: #adcaff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
+}
+
+.logo h2 {
+    font-size: 30px;
+    font-family: serif;
+}
+
+.form-sec {
+    display: flex;
+}
+
+.right-sec {
+    padding: 20px;
+    background-color: #054fd9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 0 0 20px;
+}
+
+.left-sec {
+    padding: 30px;
+    border-radius: 20px;
 }
 
 
@@ -242,6 +276,7 @@ footer {
 }
 
 form {
+    margin-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -308,6 +343,15 @@ form label {
         /* space between cards */
         align-items: stretch;
     }
+
+    .form-sec {
+        flex-direction: column;
+    }
+
+    .time-select {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* Optional: Make tables scrollable on mobile */
@@ -342,5 +386,9 @@ form label {
         flex-direction: column;
         justify-content: center;
         height: auto;
+    }
+
+    .right-sec {
+        border-radius: 20px 20px 0 0;
     }
 }

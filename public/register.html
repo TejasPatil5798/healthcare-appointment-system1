@@ -61,63 +61,78 @@
         </div>
     </nav>
 
-    <div class="in-main">
-        <main>
-            <h1>Register</h1>
-            <form id="registerForm">
-                <label><span>Name:</span>
-                    <input name="name" id="name" required placeholder="Enter full name">
-                </label><br>
-
-                <label><span>Email:</span>
-                    <input name="email" type="email" required>
-                </label><br>
-
-                <label><span>Password:</span>
-                    <input name="password" type="password" required>
-                </label><br>
-
-                <label><span>Role:</span>
-                    <select name="role" id="roleSelect">
-                        <option value="patient">Patient</option>
-                        <option value="doctor">Doctor</option>
-                    </select>
-                </label><br>
-
-                <div id="doctorFields" style="display:none;">
-                    <label>Specialization:
-                        <input name="specialization" id="specialization" placeholder="e.g. Cardiologist">
-                    </label><br>
-
-                    <div class="availability-section">
-                        <label><strong>Availability:</strong></label>
-                        <div class="weekday">
-                            <label><input type="checkbox" value="Mon"> Mon</label>
-                            <label><input type="checkbox" value="Tue"> Tue</label>
-                            <label><input type="checkbox" value="Wed"> Wed</label>
-                            <label><input type="checkbox" value="Thu"> Thu</label>
-                            <label><input type="checkbox" value="Fri"> Fri</label>
-                            <label><input type="checkbox" value="Sat"> Sat</label>
-                            <label><input type="checkbox" value="Sun"> Sun</label>
-                        </div>
-
-                        <div class="time-select">
-                            <label>From: <input type="time" id="startTime"></label>
-                            <label>To: <input type="time" id="endTime"></label>
-                        </div>
+    <section class="content-form">
+        <div class="main-form">
+            <div class="form-sec">
+                <div class="right-sec">
+                    <div class="logo">
+                        <img src="/images/pngwing.com.png" alt="logo" style="width: 50px; height:50px">
+                        <h2>Omkar Hospital</h2>
+                        <p class="tagline">Compassion • Care • Cure</p>
                     </div>
-
-                    <label>Contact:
-                        <input name="contact" id="contact" maxlength="10" placeholder="10-digit number">
-                    </label><br>
+                    <div class="welcome-text">
+                        <h3>Welcome to the<br>Healthcare<br>Appointment<br>System</h3>
+                        <p>Book appointments with ease.</p>
+                    </div>
                 </div>
+                <div class="left-sec">
+                    <h1>Register</h1>
+                    <form id="registerForm">
+                        <label><span>Name:</span>
+                            <input name="name" id="name" required placeholder="Enter full name">
+                        </label><br>
 
-                <button type="submit">Register</button>
-            </form>
+                        <label><span>Email:</span>
+                            <input name="email" type="email" required>
+                        </label><br>
 
-            <div id="msg"></div>
-        </main>
-    </div>
+                        <label><span>Password:</span>
+                            <input name="password" type="password" required>
+                        </label><br>
+
+                        <label><span>Role:</span>
+                            <select name="role" id="roleSelect">
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </label><br>
+
+                        <div id="doctorFields" style="display:none;">
+                            <label>Specialization:
+                                <input name="specialization" id="specialization" placeholder="e.g. Cardiologist">
+                            </label><br>
+
+                            <div class="availability-section">
+                                <label><strong>Availability:</strong></label>
+                                <div class="weekday">
+                                    <label><input type="checkbox" value="Mon"> Mon</label>
+                                    <label><input type="checkbox" value="Tue"> Tue</label>
+                                    <label><input type="checkbox" value="Wed"> Wed</label>
+                                    <label><input type="checkbox" value="Thu"> Thu</label>
+                                    <label><input type="checkbox" value="Fri"> Fri</label>
+                                    <label><input type="checkbox" value="Sat"> Sat</label>
+                                    <label><input type="checkbox" value="Sun"> Sun</label>
+                                </div>
+
+                                <div class="time-select">
+                                    <label>From: <input type="time" id="startTime"></label>
+                                    <label>To: <input type="time" id="endTime"></label>
+                                </div>
+                            </div>
+
+                            <label>Contact:
+                                <input name="contact" id="contact" maxlength="10" placeholder="10-digit number">
+                            </label><br>
+                        </div>
+
+                        <button type="submit">Register</button>
+                    </form>
+
+                    <div id="msg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <p>copyrights @ Omkar Hospital</p>
