@@ -7,7 +7,7 @@ body {
     font-family: system-ui, -apple-system, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #81c7fd;
+    background: #ffffff;
     color: #111;
     /* width: 100%; */
     height: auto;
@@ -21,12 +21,13 @@ h3 {
 }
 
 nav {
-    background: #2d6cdf;
-    color: white;
+    background: #effbff;
+    color: rgb(0, 0, 0);
     padding: 20px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 nav h2 {
@@ -34,10 +35,14 @@ nav h2 {
 }
 
 nav a {
-    color: white;
+    color: rgb(255, 255, 255);
     margin: 12px;
+    font-size: 18px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    background-color: #0055ff;
+    border-radius: 50px;
+    padding: 5px 15px;
 }
 
 .menu-toggle {
@@ -47,7 +52,7 @@ nav a {
 }
 
 .hero {
-    background: url("/images/martha-dominguez-de-gouveia-nMyM7fxpokE-unsplash.jpg") no-repeat center/cover;
+    background: url("/public/images/stethoscope.jpg") no-repeat center/cover;
     height: auto;
     width: 100%;
     margin-top: 0;
@@ -71,7 +76,7 @@ nav a {
 }
 
 .hero h1 {
-    color: white;
+    color: rgb(213, 213, 213);
     font-size: 3rem;
     padding: 20vh 10px 0 50px;
     text-align: left;
@@ -81,7 +86,7 @@ nav a {
 }
 
 .hero h1 span {
-    color: #2d6cdf;
+    color: #9fe7ff;
     font-size: 4rem;
     z-index: 2;
 }
@@ -106,16 +111,17 @@ nav a {
 .content-form {
     display: flex;
     align-items: center;
+    /* background: rgb(104, 104, 104); */
     min-height: 77vh;
     padding: 20px 60px;
-    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
     padding: 18px;
     /* width: 100%; */
     margin: 0 auto;
-    background: #dae7ff;
+    background: #dedede;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -140,6 +146,17 @@ main h1 {
     margin: 12px 0;
     border-radius: 6px;
     width: 95%;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.6);
+}
+
+.doctor:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.appointment:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 button,
@@ -167,9 +184,12 @@ footer {
     justify-content: space-between;
     height: 50px;
     /* margin-top: 20px; */
-    background-color: #054fd9;
-    color: white;
+    border-top: #111 2px solid;
+    background-color: #f8fbff;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
     align-self: self-end;
+    font-style: italic;
     margin-bottom: 0;
     padding: 0 20px;
 }
@@ -193,7 +213,7 @@ footer {
     /* padding: 18px; */
     /* width: 100%; */
     margin: 18px auto;
-    background: #d2e1fd;
+    background: #cbcbcb;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -202,18 +222,23 @@ footer {
 }
 
 .logo h2 {
-    font-size: 30px;
-    font-family: serif;
+    font-size: 38px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .form-sec {
     display: flex;
 }
 
+#doctorFields input{
+    margin-left: 10px;
+}
+
 .right-sec {
     padding: 20px;
-    background-color: #054fd9;
+    background: linear-gradient(135deg, #005698, #eb90b2);
     display: flex;
+    min-width: 250px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -222,7 +247,13 @@ footer {
 
 .left-sec {
     padding: 30px;
+    background: white;
     border-radius: 20px;
+    border-radius: 0 20px 20px 0;
+}
+
+#loginForm button {
+    padding: 10px 30px;
 }
 
 
@@ -408,6 +439,10 @@ form label {
         border-radius: 20px 20px 0 0;
     }
 
+    .left-sec {
+        border-radius: 0 0 20px 20px;
+    }
+
     #appointmentsList {
         grid-template-columns: 1fr;
     }
@@ -420,5 +455,13 @@ form label {
 
     .menu-toggle {
         display: block;
+    }
+
+    #doctorFields input{
+        margin: 10px 0;
+    }
+
+    .in-nav{
+        display: flex;
     }
 }
