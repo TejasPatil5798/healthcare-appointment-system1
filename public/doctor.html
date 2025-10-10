@@ -41,7 +41,7 @@
             if (!s.user) return location.href = '/login.html';
             if (s.user.role !== 'doctor') return location.href = '/patient.html';
 
-            document.getElementById('welcomeMessage').textContent = `Welcome Dr. ${s.user.name}`;
+            document.getElementById('welcomeMessage').textContent = `Welcome ${s.user.name}`;
 
             document.getElementById('logoutLink').addEventListener('click', async () => { await fetch('/api/logout', { method: 'POST' }); location.href = '/'; });
         }

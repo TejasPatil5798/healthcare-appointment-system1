@@ -355,6 +355,13 @@ footer {
     margin: 20px auto;
 }
 
+.dr-main h2{
+    text-align: center;
+    font-size: 24px;
+    font-style: italic;
+    color: #000dff;
+}
+
 .patient-body {
     height: auto;
     background: #81c7fd;
