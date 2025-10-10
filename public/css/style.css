@@ -118,7 +118,7 @@ nav a {
     /* background: rgb(104, 104, 104); */
     min-height: 77vh;
     padding: 20px 60px;
-    background: url('images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
