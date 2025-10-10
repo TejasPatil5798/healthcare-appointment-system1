@@ -123,7 +123,7 @@ nav a:hover{
     /* background: rgb(104, 104, 104); */
     min-height: 77vh;
     padding: 20px 60px;
-    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
 }
 
 main {
@@ -157,16 +157,16 @@ main h1 {
     border-radius: 6px;
     width: 95%;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.4);
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 
 .doctor:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .appointment:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -223,7 +223,7 @@ footer {
 #doctorsList,
 #appointmentsList {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     align-items: stretch;
 }
