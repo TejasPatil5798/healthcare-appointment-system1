@@ -355,9 +355,10 @@ footer {
     margin: 20px auto;
 }
 
-.dr-main h2{
-    text-align: center;
-    font-size: 24px;
+#welcomeMessage{
+    margin: 10px 5% 20px 0;
+    text-align: end;
+    font-size: 2rem;
     font-style: italic;
     color: #000dff;
 }
