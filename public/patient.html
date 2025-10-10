@@ -18,18 +18,22 @@
 
     <div class="in-main">
         <main class="dr-main">
-            <h1>Patient Dashboard</h1>
+            <div class="welc">
+                <h2 id="welcomeMessage"></h2>
+            </div>
+            <h1 style="margin: 20px 0 30px 0;">💊 Patient Dashboard 💉</h1>
 
             <section>
                 <h2>Book an appointment</h2>
                 <form id="bookForm">
-                    <label><strong>Doctor:  </strong>
+                    <label><strong>Doctor: </strong>
                         <select id="doctorSelect" style="margin-left: 10px;"></select>
                     </label><br>
-                    <label><strong>Date & time:  </strong>
+                    <label><strong>Date & time: </strong>
                         <input type="datetime-local" id="datetime" required style="margin-left: 10px;">
                     </label><br>
-                    <label><input type="checkbox" id="zoomOption" style="margin-right: 10px;"> <strong> Book with Zoom meeting</strong> </label><br>
+                    <label><input type="checkbox" id="zoomOption" style="margin-right: 10px;"> <strong> Book with Zoom
+                            meeting</strong> </label><br>
                     <button type="submit">Book</button>
                 </form>
                 <div id="bookMsg"></div>
@@ -84,6 +88,9 @@
                 if (s.user.role === 'doctor') return location.href = '/doctor.html';
                 return location.href = '/login.html';
             }
+
+            document.getElementById('welcomeMessage').textContent = `Welcome ${s.user.name}`;
+
             document.getElementById('logoutLink').addEventListener('click', async () => {
                 await fetch('/api/logout', { method: 'POST' });
                 location.href = '/';
