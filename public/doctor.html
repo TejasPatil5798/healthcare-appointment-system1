@@ -17,6 +17,8 @@
     </nav>
 
     <main class="dr-main">
+
+        <h2 id="welcomeMessage"></h2>
         <h1>Doctor Dashboard</h1>
 
         <section>
@@ -38,16 +40,19 @@
             const s = await (await fetch('/api/session')).json();
             if (!s.user) return location.href = '/login.html';
             if (s.user.role !== 'doctor') return location.href = '/patient.html';
+
+            document.getElementById('welcomeMessage').textContent = `Welcome Dr. ${s.user.name}`;
+
             document.getElementById('logoutLink').addEventListener('click', async () => { await fetch('/api/logout', { method: 'POST' }); location.href = '/'; });
         }
 
         async function loadAppointments() {
-                        const res = await fetch('/api/doctor/appointments');
-                        const j = await res.json();
-                        const container = document.getElementById('appointmentsList');
-                        if (!j.appointments || j.appointments.length === 0) container.innerText = 'No appointments yet.';
-                        else {
-                                container.innerHTML = j.appointments.map(a => `
+            const res = await fetch('/api/doctor/appointments');
+            const j = await res.json();
+            const container = document.getElementById('appointmentsList');
+            if (!j.appointments || j.appointments.length === 0) container.innerText = 'No appointments yet.';
+            else {
+                container.innerHTML = j.appointments.map(a => `
                     <div class="appointment">
                         <p><strong>Patient:</strong> ${a.patient_name} (${a.patient_email})</p>
                         <p><strong>When:</strong> ${a.date_time}</p>
