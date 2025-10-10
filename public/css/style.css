@@ -417,11 +417,6 @@ form label {
         font-size: 16px;
     }
 
-    h1,
-    h2 {
-        font-size: 1em;
-    }
-
     nav h2{
         font-size: 24px
     }
@@ -432,6 +427,14 @@ form label {
 
     .bottom-line {
         text-align: center;
+    }
+
+    #loginForm label span {
+        width: max-content;
+    }
+
+    #registerForm label span{
+        width: max-content;
     }
 
     #doctorsList,
@@ -527,4 +530,10 @@ form label {
     .in-nav {
         display: flex;
     }
+}
+
+
+@media (max-width: 1000px) {
+
+    
 }
