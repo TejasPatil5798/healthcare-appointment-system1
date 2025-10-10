@@ -134,7 +134,7 @@ main {
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
 
@@ -560,6 +560,11 @@ form label {
 
     .welc {
         flex-direction: column-reverse;
+    }
+
+    #doctorsList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
