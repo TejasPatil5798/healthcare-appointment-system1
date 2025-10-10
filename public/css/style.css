@@ -201,7 +201,6 @@ footer {
     justify-content: space-between;
     height: 50px;
     /* margin-top: 20px; */
-    border-top: #111 2px solid;
     background-color: #f8fbff;
     color: rgb(0, 0, 0);
     font-weight: 500;
@@ -252,7 +251,7 @@ footer {
 }
 
 .right-sec {
-    background: linear-gradient(-45deg, #000dff, #af27fe, #ff00d0, #ff0073);
+    background: linear-gradient(-45deg, #000dff, #af27fe, #ff00d0, #00bbff);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
     color: white;
@@ -340,7 +339,9 @@ footer {
 
 .doctor-body {
     min-height: 100vh;
-    background: linear-gradient(to left, #111, #0bf6d7, #111);
+    background: linear-gradient(-45deg, #ffffff, #007bff, #ffffff);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
 }
 
 .dr-main {
