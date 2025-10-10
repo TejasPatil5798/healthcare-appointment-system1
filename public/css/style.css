@@ -356,19 +356,24 @@ footer {
     margin: 20px auto;
 }
 
-.welc{
+.welc {
     height: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
     border-radius: 20px;
-    width: 100%;
+    width: auto;
+    background: linear-gradient(-45deg, #000dff, #ffffff, #ffffff, #ffffff, #ffffff, #000dff);
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
 
-#welcomeMessage{
+#welcomeMessage {
     padding: 10px;
     text-align: center;
     font-size: 2rem;
     font-style: italic;
-    color: #000dff;
+    color: #000000;
 }
 
 .patient-body {
@@ -551,6 +556,10 @@ form label {
     #appointmentsList {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .welc {
+        flex-direction: column-reverse;
     }
 }
 
