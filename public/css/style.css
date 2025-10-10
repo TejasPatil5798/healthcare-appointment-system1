@@ -104,8 +104,8 @@ nav a {
 }
 
 .content {
-    background: linear-gradient(-45deg, #969cff, #edcfff, #ffa5ef, #ffcbe3);
-    background-size: 400% 400%;
+    background: linear-gradient(-45deg, #ffffff, #2b55ff, #ffffff);
+    background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
     padding: 20px 60px;
     border-radius: 0;
@@ -130,7 +130,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.06);
+    box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
 
 section {
@@ -251,7 +251,7 @@ footer {
 }
 
 .right-sec {
-    background: linear-gradient(-45deg, #000dff, #af27fe, #ff00d0, #00bbff);
+    background: linear-gradient(-45deg, #000dff, #6f00ff, #4b54ff, #3300ff);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
     color: white;
