@@ -244,6 +244,8 @@ footer {
 
 .form-sec {
     display: flex;
+    box-shadow: 0 6px 20px rgba(20, 20, 40, 0.4);
+    border-radius: 21px;
 }
 
 #doctorFields input {
@@ -251,8 +253,8 @@ footer {
 }
 
 .right-sec {
-    background: linear-gradient(-45deg, #000dff, #6f00ff, #4b54ff, #3300ff);
-    background-size: 400% 400%;
+    background: linear-gradient(-45deg, #000dff, #a200ff, #666eff, #2b00d8);
+    background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
     color: white;
     padding: 40px;
