@@ -46,7 +46,7 @@ nav a {
     transition: transform 0.8s ease;
 }
 
-nav a:hover{
+nav a:hover {
     background: #003eb9;
 }
 
@@ -109,7 +109,7 @@ nav a:hover{
 }
 
 .content {
-    background: linear-gradient(-45deg, #ffffff, #2b55ff, #ffffff);
+    background: linear-gradient(-45deg, #ffffff, #ffffff, #2b55ff, #ffffff, #ffffff);
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
     padding: 20px 60px;
@@ -155,7 +155,7 @@ main h1 {
     margin: 12px 0;
     background: white;
     border-radius: 6px;
-    width: 95%;
+    /* width: 95%; */
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.4);
     transition: 0.2s ease-in-out;
 }
@@ -417,7 +417,7 @@ form label {
         font-size: 16px;
     }
 
-    nav h2{
+    nav h2 {
         font-size: 24px
     }
 
@@ -433,7 +433,7 @@ form label {
         width: max-content;
     }
 
-    #registerForm label span{
+    #registerForm label span {
         width: max-content;
     }
 
@@ -476,7 +476,7 @@ form label {
         font-size: 14px;
     }
 
-    .hero h1{
+    .hero h1 {
         font-size: 2rem;
     }
 
@@ -497,7 +497,7 @@ form label {
         height: auto;
     }
 
-    footer p{
+    footer p {
         margin: 5px 0;
     }
 
@@ -534,6 +534,8 @@ form label {
 
 
 @media (max-width: 1000px) {
-
-    
+    #appointmentsList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
