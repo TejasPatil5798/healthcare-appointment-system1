@@ -42,7 +42,7 @@ nav a {
     font-size: 18px;
     text-decoration: none;
     font-weight: 700;
-    /* background-color: white; */
+    background-color: white;
     border-radius: 50px;
     padding: 5px 10px;
     transition: transform 0.8s ease;
@@ -60,7 +60,7 @@ nav a:hover {
 }
 
 .hero {
-    background: url("/images/stethoscope.jpg") no-repeat center/cover;
+    background: url("/public/images/stethoscope.jpg") no-repeat center/cover;
     height: auto;
     width: 100%;
     margin-top: 0;
@@ -73,7 +73,7 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #265daa6d, #0000006d);
+    background: rgba(0, 0, 0, 0.437);
     z-index: 1;
 }
 
