@@ -348,7 +348,7 @@ footer {
 
 .doctor-body {
     min-height: 100vh;
-    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center;
     /* background: linear-gradient(-45deg, #ffffff, #007bff, #ffffff); */
     background-size: 200% 200%;
     /* animation: gradientShift 8s ease infinite; */
@@ -366,7 +366,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    padding: 0 10px;
+    padding: 20px;
     justify-content: space-between;
     border-radius: 20px;
     width: auto;
@@ -379,7 +379,7 @@ footer {
     height: 300px;
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
     border-radius: 20px;
-    margin: 10px 0;
+    /* margin: 10px 0; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -412,7 +412,7 @@ footer {
     align-items: center;
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
     border-radius: 20px;
-    margin: 10px 0;
+    /* margin: 10px 0; */
 }
 
 .img-patient {
