@@ -348,7 +348,7 @@ footer {
 
 .doctor-body {
     min-height: 100vh;
-    background: url('/public/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
+    background: url('/images/tsuyoshi-kozu-NoVwXdj3YxM-unsplash.jpg') center/cover;
     /* background: linear-gradient(-45deg, #ffffff, #007bff, #ffffff); */
     background-size: 200% 200%;
     /* animation: gradientShift 8s ease infinite; */
