@@ -144,7 +144,7 @@ section {
 
 main h1 {
     text-align: center;
-    margin-bottom: 18px;
+    /* margin-bottom: 18px; */
     font-size: 2.5rem;
 }
 
@@ -358,8 +358,9 @@ footer {
 
 .welc {
     height: auto;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     padding: 0 10px;
     justify-content: space-between;
     border-radius: 20px;
@@ -368,9 +369,51 @@ footer {
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
 
+.img-div {
+    background: url('/images/Doctor.jpg') no-repeat center/cover;
+    height: 300px;
+    box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
+    border-radius: 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.overlay-dr {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #3976cc5f, #00000080);
+    z-index: 1;
+    border-radius: 20px;
+}
+
+.img-div h1 {
+    position: relative;
+    z-index: 5;
+    color: white;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.text-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+.img-patient{
+    background: url('/images/patient1.jpg') no-repeat center/cover !important;
+}
+
 #welcomeMessage {
-    padding: 10px;
-    text-align: center;
     font-size: 2rem;
     font-style: italic;
     color: #000000;
@@ -402,6 +445,9 @@ form label {
     justify-items: center;
     align-items: stretch;
 }
+
+
+
 
 
 
@@ -475,96 +521,108 @@ form label {
         display: flex;
         flex-direction: column;
     }
-}
-
-/* Optional: Make tables scrollable on mobile */
-@media (max-width: 600px) {
-    body {
-        margin: 0;
-        padding: 0;
-        height: max-content;
-    }
-
-    nav {
-        padding: 10px 10px;
-    }
-
-    table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        font-size: 14px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero h1 span {
-        font-size: 2rem;
-    }
-
-    .in-main {
-        min-height: max-content
-    }
-
-    footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: auto;
-    }
-
-    footer p {
-        margin: 5px 0;
-    }
-
-    .right-sec {
-        border-radius: 20px 20px 0 0;
-    }
-
-    .left-sec {
-        border-radius: 0 0 20px 20px;
-    }
-
-    #appointmentsList {
-        grid-template-columns: 1fr;
-    }
-
-    .dr-main {
-        min-height: 100vh;
-        width: 85%;
-        margin: 20px auto;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    #doctorFields input {
-        margin: 10px 0;
-    }
-
-    .in-nav {
-        display: flex;
-    }
-}
-
-
-@media (max-width: 1000px) {
-    #appointmentsList {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-    }
 
     .welc {
+        grid-template-columns: repeat(1, 1fr);
         flex-direction: column-reverse;
     }
 
-    #doctorsList {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    .text-div{
+        min-height: 100px;
     }
+
 }
 
-/* hi */
+
+
+    /* Optional: Make tables scrollable on mobile */
+    @media (max-width: 600px) {
+        body {
+            margin: 0;
+            padding: 0;
+            height: max-content;
+        }
+
+        nav {
+            padding: 10px 10px;
+        }
+
+        table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero h1 span {
+            font-size: 2rem;
+        }
+
+        .in-main {
+            min-height: max-content
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: auto;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .right-sec {
+            border-radius: 20px 20px 0 0;
+        }
+
+        .left-sec {
+            border-radius: 0 0 20px 20px;
+        }
+
+        #appointmentsList {
+            grid-template-columns: 1fr;
+        }
+
+        .dr-main {
+            min-height: 100vh;
+            width: 85%;
+            margin: 20px auto;
+        }
+
+        .menu-toggle {
+            display: block;
+        }
+
+        #doctorFields input {
+            margin: 10px 0;
+        }
+
+        .in-nav {
+            display: flex;
+        }
+    }
+
+
+    @media (max-width: 1000px) {
+        #appointmentsList {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .welc {
+            flex-direction: column-reverse;
+        }
+
+        #doctorsList {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* hi */
