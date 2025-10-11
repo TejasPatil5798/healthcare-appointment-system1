@@ -366,8 +366,7 @@ footer {
     justify-content: space-between;
     border-radius: 20px;
     width: auto;
-    /* background: linear-gradient(135deg, #ffffff 0%, #dbe4ff 40%, #3b82f6 100%); */
-    background: linear-gradient(-45deg, #000dff, #ffffff, #ffffff, #ffffff, #ffffff, #000dff);
+    background: linear-gradient(-45deg, #000dff, #ffffff, #ffffff,#000dff, #ffffff, #ffffff, #000dff);
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
 
@@ -403,6 +402,7 @@ footer {
 }
 
 .text-div {
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
