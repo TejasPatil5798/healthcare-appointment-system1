@@ -21,7 +21,7 @@ h3 {
 }
 
 nav {
-    background: #effbff;
+    background: #0c6dff;
     color: rgb(0, 0, 0);
     padding: 20px 25px;
     display: flex;
@@ -32,22 +32,25 @@ nav {
 
 nav h2 {
     font-size: 30px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 nav a {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin: 12px;
     font-size: 18px;
     text-decoration: none;
     font-weight: 700;
-    background-color: #0055ff;
+    /* background-color: white; */
     border-radius: 50px;
-    padding: 5px 15px;
+    padding: 5px 10px;
     transition: transform 0.8s ease;
 }
 
 nav a:hover {
-    background: #003eb9;
+    background: #00297c;
+    color: white;
 }
 
 .menu-toggle {
@@ -204,11 +207,12 @@ footer {
     justify-content: space-between;
     height: 50px;
     /* margin-top: 20px; */
-    background-color: #f8fbff;
+    background-color: #0c6dff;
     color: rgb(0, 0, 0);
-    font-weight: 500;
+    /* font-weight: 500; */
+    font-size: 14px;
     align-self: self-end;
-    font-style: italic;
+    /* font-style: italic; */
     margin-bottom: 0;
     padding: 0 20px;
 }
