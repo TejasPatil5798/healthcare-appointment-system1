@@ -134,7 +134,7 @@ main {
     padding: 18px;
     /* width: 100%; */
     margin: 0 auto;
-    background: #ffffff;
+    /* background: #ffffff; */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -372,13 +372,8 @@ footer {
     min-height: 100vh;
     width: 80%;
     margin: 20px auto;
-    background: url('/images/High-quality\ HD\ hosp.png');
+    background: url('/images/High-quality\ HD\ hosp1.png');
     background-repeat: repeat;
-    /* or 'no-repeat' if you don't want tiling */
-    background-size: cover;
-    /* or 'contain' if you want full image visible */
-    background-position: center;
-    /* background-attachment: fixed; */
     background-color: #ffffff;
 }
 
