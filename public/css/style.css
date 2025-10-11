@@ -365,6 +365,7 @@ footer {
     justify-content: space-between;
     border-radius: 20px;
     width: auto;
+    /* background: linear-gradient(135deg, #ffffff 0%, #dbe4ff 40%, #3b82f6 100%); */
     background: linear-gradient(-45deg, #000dff, #ffffff, #ffffff, #ffffff, #ffffff, #000dff);
     box-shadow: 8px 6px 20px rgba(20, 20, 40, 0.60);
 }
@@ -409,14 +410,19 @@ footer {
     margin: 10px 0;
 }
 
-.img-patient{
+.img-patient {
     background: url('/images/patient1.jpg') no-repeat center/cover !important;
 }
 
 #welcomeMessage {
     font-size: 2rem;
     font-style: italic;
-    color: #000000;
+    color: #1e1e1e;
+    font-style: italic;
+    background: linear-gradient(90deg, #000000, #2563eb, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .patient-body {
@@ -527,7 +533,7 @@ form label {
         flex-direction: column-reverse;
     }
 
-    .text-div{
+    .text-div {
         min-height: 100px;
     }
 
@@ -535,94 +541,94 @@ form label {
 
 
 
-    /* Optional: Make tables scrollable on mobile */
-    @media (max-width: 600px) {
-        body {
-            margin: 0;
-            padding: 0;
-            height: max-content;
-        }
-
-        nav {
-            padding: 10px 10px;
-        }
-
-        table {
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            font-size: 14px;
-        }
-
-        .hero h1 {
-            font-size: 2rem;
-        }
-
-        .hero h1 span {
-            font-size: 2rem;
-        }
-
-        .in-main {
-            min-height: max-content
-        }
-
-        footer {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: auto;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
-
-        .right-sec {
-            border-radius: 20px 20px 0 0;
-        }
-
-        .left-sec {
-            border-radius: 0 0 20px 20px;
-        }
-
-        #appointmentsList {
-            grid-template-columns: 1fr;
-        }
-
-        .dr-main {
-            min-height: 100vh;
-            width: 85%;
-            margin: 20px auto;
-        }
-
-        .menu-toggle {
-            display: block;
-        }
-
-        #doctorFields input {
-            margin: 10px 0;
-        }
-
-        .in-nav {
-            display: flex;
-        }
+/* Optional: Make tables scrollable on mobile */
+@media (max-width: 600px) {
+    body {
+        margin: 0;
+        padding: 0;
+        height: max-content;
     }
 
-
-    @media (max-width: 1000px) {
-        #appointmentsList {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        .welc {
-            flex-direction: column-reverse;
-        }
-
-        #doctorsList {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-        }
+    nav {
+        padding: 10px 10px;
     }
 
-    /* hi */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero h1 span {
+        font-size: 2rem;
+    }
+
+    .in-main {
+        min-height: max-content
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+    }
+
+    footer p {
+        margin: 5px 0;
+    }
+
+    .right-sec {
+        border-radius: 20px 20px 0 0;
+    }
+
+    .left-sec {
+        border-radius: 0 0 20px 20px;
+    }
+
+    #appointmentsList {
+        grid-template-columns: 1fr;
+    }
+
+    .dr-main {
+        min-height: 100vh;
+        width: 85%;
+        margin: 20px auto;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    #doctorFields input {
+        margin: 10px 0;
+    }
+
+    .in-nav {
+        display: flex;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    #appointmentsList {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .welc {
+        flex-direction: column-reverse;
+    }
+
+    #doctorsList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* hi */
