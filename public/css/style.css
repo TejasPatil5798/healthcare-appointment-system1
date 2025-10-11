@@ -60,7 +60,7 @@ nav a:hover {
 }
 
 .hero {
-    background: url("/public/images/stethoscope.jpg") no-repeat center/cover;
+    background: url("/images/stethoscope.jpg") no-repeat center/cover;
     height: auto;
     width: 100%;
     margin-top: 0;
