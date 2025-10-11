@@ -446,7 +446,7 @@ form label {
 
 #appointmentsList {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     justify-items: center;
     align-items: stretch;
@@ -513,7 +513,7 @@ form label {
     #doctorsList,
     #appointmentsList {
         display: grid;
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(1, 1fr) !important;
         gap: 30px;
         /* space between cards */
         align-items: stretch;
@@ -618,7 +618,7 @@ form label {
 @media (max-width: 1000px) {
     #appointmentsList {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .welc {
